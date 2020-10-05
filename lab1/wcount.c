@@ -1,32 +1,23 @@
 #include <stdio.h>
-#include <ctype.h> 
-#include <stdbool.h>
+#include <ctype.h>
 
-#define MAX 10 
+#define IN 1    /* inside a word */
+#define OUT 0    /* outside a word */
 
-int main(){
-    int word_count = 0;
-    char input[MAX];
-    int is_digit;
-    bool no_digits = true;
-    fgets(input, MAX, stdin);
+/* count words, where a word is a sequence of letters */
+int main()
+{
+    long long nw = 0LL;
+    int c, state;
 
-    printf("%s",input);
-    
-    for(int i = 0; i < MAX; i++){
-        while(input[i] != ' '){
-            is_digit = isdigit(input[i]);
-            if(is_digit==0){
-                no_digits = true;
-            }else{
-                no_digits = false;
-            }
-         }
-
-        if (is_digit==0){
-            ++word_count;
+    state = OUT;
+    while ((c = getchar()) != EOF)
+        if (! isalpha(c))
+            state = OUT;
+        else if (state == OUT) {
+            state = IN;
+            nw++;
         }
-   }
-    printf("\n%d",word_count);  
+    printf("%lld\n", nw);
+    return 0;
 }
-         
