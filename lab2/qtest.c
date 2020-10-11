@@ -10,28 +10,34 @@ line
 * it then removes each item from the queue, printing out the integer on
 * a line by itself on standard output
 */
-int main(){
+int main()
+{
     Queue *q;
     char buf[MAXLINE];
     int *i, prio;
-    if ((q = q_create()) == NULL) {
+    if ((q = q_create()) == NULL)
+    {
         fprintf(stderr, "Unable to create queue of integers\n");
         return -1;
     }
-    while (fgets(buf, MAXLINE, stdin) != NULL) {
+    while (fgets(buf, MAXLINE, stdin) != NULL)
+    {
         i = (int *)malloc(sizeof(int));
-        if (! i) {
+        if (!i)
+        {
             fprintf(stderr, "Unable to allocate int on heap\n");
             return -2;
         }
         *i = atoi(buf);
         prio = MAX_PRIO + ((*i - MAX_PRIO) % PRIODIF);
-        if (! (q_add(q, i, prio))) {
-            fprintf(stderr, "Unable to add %d to the Queue\n", *i);
+        if (!(q_add(q, i, prio)))
+        {
+            fprintf(stderr, "Unable to add %d to the Queue\n", i);
             return -2;
         }
     }
-    while ((i = (int *)q_remove(q))) {
+    while ((i = (int *)q_remove(q)))
+    {
         printf("%d\n", *i);
         free(i);
     }

@@ -1,7 +1,9 @@
 #ifndef _QUEUE_H_
 #define _QUEUE_H_
+
 typedef struct queue Queue;
 typedef void *Item;
+
 #define MIN_PRIO 10
 #define MAX_PRIO 1
 
