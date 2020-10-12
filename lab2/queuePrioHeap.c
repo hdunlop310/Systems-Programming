@@ -1,11 +1,10 @@
 #include "queue.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 /*
- * implementation of a ProiLL queue using a linked list
- * priority argument in add()
+ * implementation of a FIFO queue using a linked list
+ * ignore priority argument in add()
  */
 
 struct q_element {
@@ -38,6 +37,7 @@ Queue *q_create(void) {
  */
 int q_add(Queue *q, Item i, int prio) {
     struct q_element *p;
+
     p = (struct q_element *)malloc(sizeof(struct q_element));
     if (p != NULL) {
         p->value = i;
@@ -68,4 +68,32 @@ Item q_remove(Queue *q) {
     i = p->value;
     free(p);
     return i;
+}
+
+void siftup(int x[], int n){
+    int p, i=n;
+    
+    while(i > 1){
+        if (x[p] <= x[i])
+            break;
+        swap(x+p, x+i);
+        i = p;
+    }
+}
+
+void siftdown(int x[], int n){
+    int c, i;
+    i = 1;
+    while (1){
+        c = 2 * i;
+        if (c > n)
+            break;
+        if(c+1) <=n
+            if (x[c+1]<x[c])
+                c++;
+        if(x[i] <= x[c])
+            break;
+        swap(x+c, x+i);
+        i = c;
+    }
 }
