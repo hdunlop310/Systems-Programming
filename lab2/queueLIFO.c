@@ -4,7 +4,7 @@
 /*
 * implementation of a FIFO queue using a linked list
 * ignore priority argument in add()
-*/  
+*/
 struct q_element
 {
     struct q_element *next;
