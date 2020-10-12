@@ -32,7 +32,7 @@ int main()
         prio = MAX_PRIO + ((*i - MAX_PRIO) % PRIODIF);
         if (!(q_add(q, i, prio)))
         {
-            fprintf(stderr, "Unable to add %d to the Queue\n", i);
+            fprintf(stderr, "Unable to add %d to the Queue\n",*i);
             return -2;
         }
     }
