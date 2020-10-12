@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) {
-    int size = (int) argv[0];
+    printf("%c",argv[0];
     if (scanf("%d", &size) == EOF) { exit(-1); }
 
     int* array = malloc(size * sizeof(int));
