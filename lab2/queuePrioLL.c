@@ -6,11 +6,13 @@
 /*
  * implementation of a ProiLL queue using a linked list
  * priority argument in add()
+ * added prio attribute to q_element struct
  */
 
 struct q_element {
     struct q_element *next;
     void *value;
+    int prio;
 };
 
 struct queue {
@@ -63,8 +65,6 @@ Item q_remove(Queue *q) {
         return NULL;
     p = q->head;
     q->head = p->next;
-    if (q->head == NULL)
-        q->tail = NULL;
     i = p->value;
     free(p);
     return i;
