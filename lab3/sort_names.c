@@ -8,8 +8,16 @@ struct name {
 };
 typedef struct name name;
 
-static int compare_names(const void *arg1, const void *arg2) {
-    return strcmp( *(char * const *) arg1, *(char * const *) arg2);
+static int compare_by_first(const void *arg1, const void *arg2) {
+    name ia = *(name *)arg1;
+    name ib = *(name *)arg2;
+    return strcmp(ia.first_name, ib.first_name);
+}
+
+static int compare_by_second(const void *arg1, const void *arg2) {
+    name ia = *(name *)arg1;
+    name ib = *(name *)arg2;
+    return strcmp(ia.last_name, ib.last_name);
 }
 
 int main() {
@@ -19,9 +27,22 @@ int main() {
     {"Ken", "Thompson"},
     {"Bjarne", "Stroustrup"},
     };    
-    size_t names_length = sizeof(names)/sizeof(name);
-    qsort(names, names_length, sizeof(name *), compare_names);
 
+    qsort(names, 4, sizeof(name), compare_by_first);
+    
+    printf("Sorted by first name:\n");
+
+    for (int i = 0; i<4; i++){
+        printf("%s %s\n",names[i].first_name, names[i].last_name);
+    }
+
+    qsort(names, 4, sizeof(name), compare_by_second);
+    printf("\nSorted by second name:\n");
+
+    for (int i = 0; i<4; i++){
+        printf("%s %s\n",names[i].first_name, names[i].last_name);
+    }
+    
     return 0;
 
 }
